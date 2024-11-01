@@ -137,46 +137,6 @@
         <p class="login-link">Already have an account? <a href="index.html">Login</a></p>
     </div>
 
-    <script>
-        const signupForm = document.getElementById('signupForm');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
-
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const newUsername = document.getElementById('newUsername').value;
-            const newEmail = document.getElementById('newEmail').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const role= document.getElementById('role').value;
-
-            if (newUsername === '' || newPassword === '' || newEmail === '' || role === '') {
-                errorMessage.innerHTML = 'Please fill in all fields';
-                errorMessage.style.display = 'block';
-            } else {
-                // Retrieve existing users from localStorage
-                let users = JSON.parse(localStorage.getItem('users')) || [];
-
-                // Check if the username is already taken
-                const userExists = users.some(user => user.email === newEmail);
-                if (userExists) {
-                    errorMessage.innerHTML = 'User already exists with this email id!';
-                    errorMessage.style.display = 'block';
-                } else {
-                    // Add new user to the users array
-                    users.push({ username: newUsername, email: newEmail, password: newPassword, role: role });
-                    localStorage.setItem('users', JSON.stringify(users));
-
-                    // Show success message and redirect
-                    successMessage.style.display = 'block';
-                    errorMessage.style.display = 'none';
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 2000);
-                }
-            }
-        });
-    </script>
 
 </body>
 </html>
